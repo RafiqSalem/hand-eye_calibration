@@ -1,5 +1,5 @@
 __init__ 
-go_home
+go_home --en cours
 get_state
 get_current_joints
 move_joints
