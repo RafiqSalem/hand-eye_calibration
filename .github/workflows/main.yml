@@ -1,6 +1,6 @@
 __init__ 
 go_home finished
-get_state
+get_state --en cours
 get_current_joints
 move_joints
 
