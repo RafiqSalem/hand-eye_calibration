@@ -1,4 +1,4 @@
-from robot.ur_robot import URRobot
+from robot.Fanuc_robot import FanucRobot
 from vision.realsense_d415_tcp import RealsenseD415TCP
 import utils.utils as utils
 import vision.utils as visionutils
