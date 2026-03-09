@@ -7,8 +7,10 @@ import select
 import struct
 import numpy as np
 import time
+import json
+import os
 
-class URRobot():
+class FanucRobot():
     """Universal Robots."""
     NUM_BYTES = 2048
     ROBOT_STATE_MESSAGE = 16
@@ -33,6 +35,60 @@ class URRobot():
         if start_on_creation:
             self.start()
 
+    def __init__(self, image_processor=None, ui=None):
+        self.imp = image_processor
+        self.ui = ui
+        self.rmi = None
+
+        try:
+            config = self.load_robot_config("configurations\robot_config.json")
+            
+            self.UT_CAM_NO = config.get("UT_CAM_NO")
+            self.UT_CAM_DATA = config.get("UT_CAM_DATA")
+            
+            self.UF_HORIZONTAL_NO = config.get("UF_HORIZONTAL_NO")
+            self.UF_HORIZONTAL_DATA = config.get("UF_HORIZONTAL_DATA")
+            
+        except FileNotFoundError as e:
+            print(e)
+
+        self.robot_config = (
+            {  # Dictionary that defines rotations when more than 1 solution exists, as well as current UTool and UFrame
+                "UToolNumber": None,
+                "UFrameNumber": None,
+                "Front": 1,
+                "Up": 1,
+                "Left": 0,
+                "Flip": 1,
+                "Turn4": 0,
+                "Turn5": 0,
+                "Turn6": 0,
+            }
+        )
+
+        self.selected_holes_adjusted_probing_pos = []
+
+
+        self.tcp_pos_uf_probe = None  # Current position of the probe tool in the current user frame
+        self.tcp_pos_uf_camera = None  # Current position of the camera tool in the current user frame
+
+    def load_robot_config(self, file_path):
+        """
+        Charge les données de configuration du robot à partir d'un fichier JSON.
+
+        Args:
+            file_path (str): Le chemin vers le fichier JSON.
+
+        Returns:
+            dict: Un dictionnaire contenant les données de configuration.
+        """
+        if not os.path.exists(file_path):
+            raise FileNotFoundError(f"Le fichier de configuration {file_path} n'a pas été trouvé.")
+        
+        with open(file_path, 'r') as f:
+            config_data = json.load(f)
+        return config_data
+
     # Robot methods
     # -------------------------------------
     def go_home(self):
@@ -43,6 +99,7 @@ class URRobot():
         return self.parse_tcp_state_data(self.get_tcp_state())
 
     def get_current_joints(self):
+        ok, joint_status = self.rmi.rmi_read_joint_angles()
         return self.parse_tcp_state_data(self.get_tcp_state(), subpackages=['joint_data'])['joint_data']
 
     def move_joints(self, joint_configuration_rad):

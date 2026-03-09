@@ -1,4 +1,4 @@
-from robot.Fanuc_robot import FanucRobot
+from robot.fanuc_robot import FanucRobot
 from vision.realsense_d415_tcp import RealsenseD415TCP
 import utils.utils as utils
 import vision.utils as visionutils
@@ -68,7 +68,7 @@ def calibrate(config):
 
     # Connect to the robot
     print('Connecting to robot...')
-    robot = URRobot(config.robot_config_file)
+    robot = FanucRobot(config.robot_config_file)
     # Slow down robot to SAFE values
     robot.activate_safe_mode()
     robot.go_home()

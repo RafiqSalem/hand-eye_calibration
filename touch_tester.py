@@ -11,7 +11,7 @@ import argparse
 def touch_tester(args):
     config = ConfigLoader.load(args.config_file)
     print(f'Touch tester in {config["calibration_type"]} mode as indicated on configuration file.')
-    robot = URRobot(config["robot_config_file"])
+    robot = FanucRobot(config["robot_config_file"])
     robot.activate_safe_mode()
     robot.move_joints(robot.home_joints_rad)
 
