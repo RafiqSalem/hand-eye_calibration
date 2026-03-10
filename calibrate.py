@@ -1,5 +1,5 @@
 from robot.fanuc_robot import FanucRobot
-from vision.realsense_d415_tcp import RealsenseD415TCP
+from vision.realsense_d435_tcp import Realsensed435TCP
 import utils.utils as utils
 import vision.utils as visionutils
 from utils.config_loader import ConfigLoader
@@ -74,7 +74,7 @@ def calibrate(config):
     robot.go_home()
     # Connect to the camera
     print('Connecting to camera...')
-    camera = RealsenseD415TCP(config.camera_config_file)
+    camera = Realsensed435TCP(config.camera_config_file)
 
     # Move robot to each calibration point in workspace
     print('Collecting data...')

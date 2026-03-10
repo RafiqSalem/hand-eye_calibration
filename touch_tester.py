@@ -1,5 +1,5 @@
 from robot.fanuc_robot import FanucRobot
-from vision.realsense_d415_tcp import RealsenseD415TCP
+from vision.realsense_d435_tcp import Realsensed435TCP
 import utils.utils as utils
 import vision.utils as visionutils
 from utils.config_loader import ConfigLoader
@@ -15,7 +15,7 @@ def touch_tester(args):
     robot.activate_safe_mode()
     robot.move_joints(robot.home_joints_rad)
 
-    camera = RealsenseD415TCP(config["camera_config_file"])
+    camera = Realsensed435TCP(config["camera_config_file"])
     # Load camera pose (from running camera_calibrator.py), and depth scale
     cam_pose = np.loadtxt(config["calibration_camera_pose"], delimiter=' ')
     cam_depth_scale = np.loadtxt(config["calibration_depth_scale"], delimiter=' ')

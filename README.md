@@ -119,7 +119,7 @@ Keep it running while calibrating, each time the robot connects to retrieve an R
     - "EYE_IN_HAND": the camera mounted on the robot.
     - "EYE_TO_HAND": the camera is fixed to the workspace and independent of robot moves. 
   - __calib_grid_step__: it defines the step distance in meters between "photo positions". (e.g. 0.05 meters)
-  - __workspace_limits__: it is a cube defined by 3 points (X,Y,Z) from the robots' base. Inside this cube the robot will move to the different "photo positions" parameterized by __calib_grid_step__ to capture a data point. It is important to take into account that the closest distance from the camera to the checkerboard is higher than the minZ value of the depth channel. Note: on RealSense D415, minZ is 0.5 meters. shape = (3,2). rows = X, Y, Z. colums = MIN, MAX values.
+  - __workspace_limits__: it is a cube defined by 3 points (X,Y,Z) from the robots' base. Inside this cube the robot will move to the different "photo positions" parameterized by __calib_grid_step__ to capture a data point. It is important to take into account that the closest distance from the camera to the checkerboard is higher than the minZ value of the depth channel. Note: on RealSense d435, minZ is 0.5 meters. shape = (3,2). rows = X, Y, Z. colums = MIN, MAX values.
   - __reference_point_offset__: it is the point (X,Y,Z) position of the center of the checkerboard pattern with respect to the robots' base on eye-in-hand or the robot's TCP on eye-to-hand.
   - __tool_orientation__: it is the orientation of the robot TCP in the robots' base system for every "photo position".
   - __checkerboard_size__: the size of the checkerboard. E.g. a checkerboard of 4x4 black-white squares is of size 3 as that is the number of inner crosses.
@@ -143,7 +143,7 @@ Keep it running while calibrating, each time the robot connects to retrieve an R
 
 8. Once the calibration process ends, two files will be stored in `hand-eye_calibration/calibrations/`:
  - `DATETIME_camera_pose.txt`: it contains the transformation matrix between the robot and the camera.
- - `DATETIME_camera_depth_offset.txt`: it contains a value which is a scale factor that should be multiplied with each pixel captured from the camera. Note: as tested RealSense D415 series are not likely to suffer a scaling problem, but other devices might.
+ - `DATETIME_camera_depth_offset.txt`: it contains a value which is a scale factor that should be multiplied with each pixel captured from the camera. Note: as tested RealSense d435 series are not likely to suffer a scaling problem, but other devices might.
 
 9. To test the result of the calibrated camera extrinsics edit the `configurations/touch_tester_config.json` file to meet your setup and execute `$ python touch_tester.py`. It provides a UI where the user can click at any point in the RGBD image and the robot moves its end-effector to the 3D location of that point.
 
@@ -163,7 +163,7 @@ Keep it running while calibrating, each time the robot connects to retrieve an R
 - RGBD Camera, Robot and PC.
 
  #### Tested on:
-  - RGBD Camera: Intel RealSense D415
+  - RGBD Camera: Intel RealSense d435
   - Robot: UR10e
   - PC: Ubuntu 18 and 20 running Python 3.8
 

@@ -1,4 +1,4 @@
-from vision.realsense_d415_tcp import RealsenseD415TCP
+from vision.realsense_d435_tcp import Realsensed435TCP
 from utils.config_loader import ConfigLoader
 import argparse
 import cv2
@@ -13,7 +13,7 @@ if __name__ == '__main__':
     configuration = ConfigLoader.load(args.config_file)
     # Connect to the camera
     print('Connecting to camera...')
-    camera = RealsenseD415TCP(configuration['camera_config_file'])
+    camera = Realsensed435TCP(configuration['camera_config_file'])
 
     #Create color and depth windows.
     cv2.namedWindow('color')

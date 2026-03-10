@@ -145,7 +145,7 @@ int main(int argc, char * argv[]) try {
     dev = devices[0];
   }
 
-  if (strcmp(dev.get_info(RS2_CAMERA_INFO_NAME), "Intel RealSense D415") == 0) // Check for compatibility, must have if executed on a computer
+  if (strcmp(dev.get_info(RS2_CAMERA_INFO_NAME), "Intel RealSense d435") == 0) // Check for compatibility, must have if executed on a computer
 	{
 		std::string serial = dev.get_info(RS2_CAMERA_INFO_SERIAL_NUMBER);
 		std::string json_file_name = "./camera_configuration.json";
@@ -268,7 +268,7 @@ int main(int argc, char * argv[]) try {
   }
   else
   {
-	   std::cout << "Selected device is not an Intel RealSense D415, check the devices list. " << std::endl;
+	   std::cout << "Selected device is not an Intel RealSense d435, check the devices list. " << std::endl;
 	    return EXIT_FAILURE;
   }
 

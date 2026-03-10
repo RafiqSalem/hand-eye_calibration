@@ -2,11 +2,11 @@ from utils.config_loader import ConfigLoader
 import numpy as np
 import socket
 
-class RealsenseD415TCP():
+class Realsensed435TCP():
 
     def __init__(self, configuration_filepath, start_on_creation=True):
         """
-        Initializes a new Realsense D415 Camera over TCP connection.
+        Initializes a new Realsense d435 Camera over TCP connection.
 
         Args:
             configuration_filepath (string): path to the configuration JSON file.

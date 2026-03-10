@@ -5,7 +5,7 @@ LDLIBS= -lrealsense2 -lpthread
 FILES= rs_server.cpp
 OBJS= rs_server.o
 #OPTIONS
-#JSON= json/D415/pruebaHRHDP.json
+#JSON= json/d435/pruebaHRHDP.json
 #XML= json/SR305/conf.xml
 #PLY= ply/HRHDP_curva
 #OPTIONS= -p
